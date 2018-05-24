@@ -4,33 +4,33 @@
     <tabs>
       <tab id="chaoxs" label="FunWithExcel">
         <group id="AutoGenerate"
-               label="自动生成">
+               label="===自动生成===">
           <button id="Button1"
                   label="立柱轴线偏差生成"
                   size="normal"
                   imageMso="AutoFormatDialog"
                   screentip="使用说明"
                   supertip="先将相关数据Copy到本Sheet再进行操作"
-                  onAction="onAutoGen" />
+                  onAction="onAutoGen"/>
         </group >
         <group id="AutoMonitor"
-               label="自动化监测报表">
+               label="===自动化监测报表===">
           <button id="Button3"
                   label="添加棱镜常数"
                   size="normal"
                   imageMso="AddInsMenu"
                   onAction="onCalPrism"/>
-        <button id="Button4"
+          <button id="Button4"
                   label="计算控制点坐标"
                   size="normal"
-                  imageMso="Calculator"
+                  imageMso="CalculateSheet"
                   onAction="onCalBase"/>
-        <button id="Button5"
+          <button id="Button5"
                   label="替换报表"
                   size="normal"
-                  imageMso="ReplaceDialog"
+                  imageMso="MailMergeMatchFields"
                   onAction="onReplace"/>
-        <button id="Button6"
+          <button id="Button6"
                   label="生成报表"
                   size="normal"
                   imageMso="PivotTableGenerateGetPivotData"
@@ -39,10 +39,9 @@
         <group id="About"
                label="关于">
           <button id="Button2"
-                  label="关于"
                   size="large"
-                  imageMso="Info"
-                  screentip="关于"
+                  imageMso="TentativeAcceptInvitation"
+                  screentip="About"
                   supertip="Excel插件 by VSTO VB.Net"
                   onAction="onAbout1" />
         </group>

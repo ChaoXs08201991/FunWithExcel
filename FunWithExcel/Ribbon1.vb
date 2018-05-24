@@ -39,7 +39,7 @@ Public Class Ribbon1
     Public Sub onAutoGen(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)
         If LTrim(RTrim(ash.Range("A1").Value)) <> "名称" And LTrim(RTrim(ash.Range("B1").Value)) <> "偏差" Then
-            MsgBox("不适应于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            MsgBox("不适用于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
             Exit Sub
         End If
         Erase ArrayStr
@@ -265,12 +265,12 @@ Public Class Ribbon1
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
     Public Sub onAbout1(ByVal control As Office.IRibbonControl)
-        MsgBox("Excel插件 by VSTO VB.Net", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
+        MsgBox("Excel插件 by VSTO VB.NET", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
     End Sub
     Public Sub onCalPrism(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)
         If LTrim(RTrim(ash.Range("A1").Value)) <> "周期" And LTrim(RTrim(ash.Range("B1").Value)) <> "变形点" Then
-            MsgBox("不适应于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            MsgBox("不适用于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
             Exit Sub
         End If
         Dim Row As Integer = 2
@@ -297,7 +297,7 @@ Public Class Ribbon1
     Public Sub onCalBase(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)
         If LTrim(RTrim(ash.Range("A1").Value)) <> "周期" And LTrim(RTrim(ash.Range("B1").Value)) <> "变形点" Then
-            MsgBox("不适应于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            MsgBox("不适用于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
             Exit Sub
         End If
         Dim Row As Integer = 2
@@ -341,7 +341,7 @@ Public Class Ribbon1
             ash2 = CType(Globals.ThisAddIn.Application.Worksheets("自动化监测"), Excel.Worksheet)
             ash3 = CType(Globals.ThisAddIn.Application.Worksheets("隧道收敛"), Excel.Worksheet)
         Catch ex As Exception
-            MsgBox("指定Sheet工作表不存在", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
+            MsgBox("需要的Sheet工作表不存在", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
             Exit Sub
         End Try
 
@@ -424,7 +424,7 @@ Public Class Ribbon1
             ash2 = CType(Globals.ThisAddIn.Application.Worksheets("自动化监测"), Excel.Worksheet)
             ash3 = CType(Globals.ThisAddIn.Application.Worksheets("隧道收敛"), Excel.Worksheet)
         Catch ex As Exception
-            MsgBox("指定Sheet工作表不存在", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
+            MsgBox("需要的Sheet工作表不存在", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
             Exit Sub
         End Try
         'Dim ash1 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets("原始数据"), Excel.Worksheet)
