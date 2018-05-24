@@ -265,7 +265,7 @@ Public Class Ribbon1
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
     Public Sub onAbout1(ByVal control As Office.IRibbonControl)
-        MsgBox("关于", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
+        MsgBox("Excel插件 by VSTO VB.Net", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
     End Sub
     Public Sub onCalPrism(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)

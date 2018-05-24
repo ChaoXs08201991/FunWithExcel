@@ -27,17 +27,17 @@ Partial Class Form1
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.删除ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip2.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
-        Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -69,6 +69,18 @@ Partial Class Form1
         Me.Column3.Name = "Column3"
         Me.Column3.Width = 80
         '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.删除ToolStripMenuItem1})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(101, 26)
+        '
+        '删除ToolStripMenuItem1
+        '
+        Me.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1"
+        Me.删除ToolStripMenuItem1.Size = New System.Drawing.Size(100, 22)
+        Me.删除ToolStripMenuItem1.Text = "删除"
+        '
         'DataGridView2
         '
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -86,15 +98,6 @@ Partial Class Form1
         Me.Column4.Name = "Column4"
         Me.Column4.Width = 70
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(325, 171)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(89, 34)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "关闭"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.删除ToolStripMenuItem})
@@ -104,20 +107,17 @@ Partial Class Form1
         '删除ToolStripMenuItem
         '
         Me.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem"
-        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.删除ToolStripMenuItem.Text = "删除"
         '
-        'ContextMenuStrip2
+        'Button1
         '
-        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.删除ToolStripMenuItem1})
-        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(101, 26)
-        '
-        '删除ToolStripMenuItem1
-        '
-        Me.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1"
-        Me.删除ToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.删除ToolStripMenuItem1.Text = "删除"
+        Me.Button1.Location = New System.Drawing.Point(325, 171)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(89, 34)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "确定并关闭"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -131,9 +131,9 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "输入参数"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip2.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

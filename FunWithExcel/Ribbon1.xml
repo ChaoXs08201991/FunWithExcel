@@ -9,14 +9,9 @@
                   label="立柱轴线偏差生成"
                   size="normal"
                   imageMso="AutoFormatDialog"
-                  onAction="onAutoGen" />
-          <button id="Button2"
-                  label="关于"
-                  size="normal"
-                  imageMso="AnimationTransitionGallery"
                   screentip="使用说明"
-                  supertip="鼠标放在上面显示使用说明"
-                 onAction="onAbout1" />
+                  supertip="先将相关数据Copy到本Sheet再进行操作"
+                  onAction="onAutoGen" />
         </group >
         <group id="AutoMonitor"
                label="自动化监测报表">
@@ -40,7 +35,17 @@
                   size="normal"
                   imageMso="PivotTableGenerateGetPivotData"
                   onAction="onGenerate"/>
-        </group>         
+        </group>
+        <group id="About"
+               label="关于">
+          <button id="Button2"
+                  label="关于"
+                  size="large"
+                  imageMso="Info"
+                  screentip="关于"
+                  supertip="Excel插件 by VSTO VB.Net"
+                  onAction="onAbout1" />
+        </group>
       </tab>
     </tabs>
   </ribbon>
