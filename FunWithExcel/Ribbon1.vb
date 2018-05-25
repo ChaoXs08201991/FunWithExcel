@@ -329,6 +329,80 @@ Public Class Ribbon1
         Loop
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
+
+    Public Sub onCalAPM1(ByVal control As Office.IRibbonControl)
+        'MsgBox("Excel插件 by VSTO VB.NET", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
+        'Dim tmpAsh(1) As Excel.Worksheet
+        'tmpAsh(0) = CType(Globals.ThisAddIn.Application.Worksheets("1"), Excel.Worksheet)
+        Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)
+        Dim nRows As Integer = 0
+        Do Until ash.Range("A" & nRows + 1).Text = ""
+            nRows = nRows + 1
+        Loop
+        'nRows = ash.UsedRange.Rows.Count
+        If nRows < 4 Or ((nRows - 1) Mod 3 <> 0) Then
+            MsgBox("检查控制点坐标行数", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
+            Exit Sub
+        End If
+        ash.Range("E1").Value = "Scene文件号"
+        Dim i As Integer
+        For i = 2 To nRows Step 3
+            With ash.Range("E" & i & ":E" & i + 2)
+                .HorizontalAlignment = Excel.Constants.xlCenter
+                .VerticalAlignment = -4108
+                .MergeCells = True
+            End With
+        Next
+        With ash.Range("F1:H1")
+            .HorizontalAlignment = Excel.Constants.xlCenter
+            .VerticalAlignment = -4108
+            .MergeCells = True
+        End With
+        ash.Range("F1").Value = "拟合球坐标"
+        ash.Range("I1").Value = "x"
+        ash.Range("J1").Value = "y"
+        ash.Range("K1").Value = "z"
+        ash.Range("L1").Value = "z旋转"
+        '        Dim worksheet1 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets(2),
+        'Excel.Worksheet)
+        '        'Dim worksheet3 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets(3),
+        '        'Excel.Worksheet)
+        '        worksheet1.Copy(After:=worksheet1)
+        '        worksheet1.Name = "0"
+
+        Dim calAPMNum As Integer
+        calAPMNum = (nRows - 1) / 3
+        Dim tmpAsh(calAPMNum - 1) As Excel.Worksheet
+        tmpAsh(0) = CType(Globals.ThisAddIn.Application.Worksheets(2), Excel.Worksheet)
+        tmpAsh(0).Name = "0"
+        For i = 1 To calAPMNum - 1
+            tmpAsh(i - 1).Copy(After:=tmpAsh(i - 1))
+            tmpAsh(i) = CType(Globals.ThisAddIn.Application.Worksheets(i + 2), Excel.Worksheet)
+            tmpAsh(i).Name = i
+        Next
+        '///////////////////
+        '根据Sheet1中E列的编号更新后续Sheet工作表
+        'For i = 0 To calAPMNum - 1
+        '    tmpAsh(i).Name = ash.Range("E" & 3 * i + 2).Text
+        'Next
+        '//////////////////
+
+        '填充控制点坐标
+        Dim ashs As Excel.Worksheets
+        ashs = Globals.ThisAddIn.Application.Worksheets()
+
+
+        ashs.FillAcrossSheets(ash.Range("B2:D4"))
+        For i = 0 To calAPMNum - 1
+
+        Next
+
+
+
+        'ash.Range("A1").Select()
+        ash.Activate()
+
+    End Sub
     Public Sub onReplace(ByVal control As Office.IRibbonControl)
         'Dim ash1 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets("原始数据"), Excel.Worksheet)
         'If CType(Globals.ThisAddIn.Application.Worksheets("自动化监测"), Excel.Worksheet) Is Nothing Or
