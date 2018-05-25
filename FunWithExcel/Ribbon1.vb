@@ -380,6 +380,7 @@ Public Class Ribbon1
             tmpAsh(i) = CType(Globals.ThisAddIn.Application.Worksheets(i + 2), Excel.Worksheet)
             tmpAsh(i).Name = i
         Next
+
         '///////////////////
         '根据Sheet1中E列的编号更新后续Sheet工作表
         'For i = 0 To calAPMNum - 1
@@ -388,15 +389,14 @@ Public Class Ribbon1
         '//////////////////
 
         '填充控制点坐标
-        Dim ashs As Excel.Worksheets
-        ashs = Globals.ThisAddIn.Application.Worksheets()
+        'ash.Range("B2:D2").Copy()
+        'ash.Range("N13:P13").PasteSpecial(Excel.XlPasteType.xlPasteValues)
 
 
-        ashs.FillAcrossSheets(ash.Range("B2:D4"))
         For i = 0 To calAPMNum - 1
-
+            ash.Range("B" & 3 * i + 2 & ":D" & 3 * i + 4).Copy()
+            tmpAsh(i).Range("B2:D4").PasteSpecial(Excel.XlPasteType.xlPasteValues)
         Next
-
 
 
         'ash.Range("A1").Select()

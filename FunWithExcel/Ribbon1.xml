@@ -37,7 +37,7 @@
                   onAction="onGenerate"/>
         </group>
         <group id ="ThreeDLaserScan"
-               label="===APM计算===">
+               label="APM计算">
           <button id="Button7"
                   label="步骤1"
                   size="normal"
