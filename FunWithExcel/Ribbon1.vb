@@ -330,11 +330,14 @@ Public Class Ribbon1
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
 
-    Public Sub onCalAPM1(ByVal control As Office.IRibbonControl)
+    Public Sub onCalAPM(ByVal control As Office.IRibbonControl)
         'MsgBox("Excel插件 by VSTO VB.NET", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
-        'Dim tmpAsh(1) As Excel.Worksheet
-        'tmpAsh(0) = CType(Globals.ThisAddIn.Application.Worksheets("1"), Excel.Worksheet)
-        Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet)
+        Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets(1), Excel.Worksheet)
+        If LTrim(RTrim(ash.Range("A1").Text)) <> "全站仪点号" And LTrim(RTrim(ash.Range("B1").Text)) <> "y" And
+                LTrim(RTrim(ash.Range("C1").Text)) <> "x" And LTrim(RTrim(ash.Range("D1").Text)) <> "z" Then
+            MsgBox("不适用于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            Exit Sub
+        End If
         Dim nRows As Integer = 0
         Do Until ash.Range("A" & nRows + 1).Text = ""
             nRows = nRows + 1
@@ -363,13 +366,6 @@ Public Class Ribbon1
         ash.Range("J1").Value = "y"
         ash.Range("K1").Value = "z"
         ash.Range("L1").Value = "z旋转"
-        '        Dim worksheet1 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets(2),
-        'Excel.Worksheet)
-        '        'Dim worksheet3 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets(3),
-        '        'Excel.Worksheet)
-        '        worksheet1.Copy(After:=worksheet1)
-        '        worksheet1.Name = "0"
-
         Dim calAPMNum As Integer
         calAPMNum = (nRows - 1) / 3
         Dim tmpAsh(calAPMNum - 1) As Excel.Worksheet
@@ -388,20 +384,24 @@ Public Class Ribbon1
         'Next
         '//////////////////
 
-        '填充控制点坐标
-        'ash.Range("B2:D2").Copy()
-        'ash.Range("N13:P13").PasteSpecial(Excel.XlPasteType.xlPasteValues)
-
-
         For i = 0 To calAPMNum - 1
             ash.Range("B" & 3 * i + 2 & ":D" & 3 * i + 4).Copy()
             tmpAsh(i).Range("B2:D4").PasteSpecial(Excel.XlPasteType.xlPasteValues)
         Next
-
-
+        Dim j As Integer = 0
+        For i = 2 To nRows Step 3
+            tmpAsh(j).Range("B10").Value = "'" & ash.Range("F" & i).Value
+            j = j + 1
+        Next
+        For i = 0 To calAPMNum - 1
+            tmpAsh(i).Range("B15:D15").Copy()
+            ash.Range("I" & 3 * i + 2 & ":K" & 3 * i + 2).PasteSpecial(Excel.XlPasteType.xlPasteValues)
+            tmpAsh(i).Range("V15").Copy()
+            ash.Range("L" & 3 * i + 2).PasteSpecial(Excel.XlPasteType.xlPasteValues)
+        Next
         'ash.Range("A1").Select()
         ash.Activate()
-
+        MsgBox("APM批量计算完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
     End Sub
     Public Sub onReplace(ByVal control As Office.IRibbonControl)
         'Dim ash1 As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets("原始数据"), Excel.Worksheet)

@@ -39,15 +39,10 @@
         <group id ="ThreeDLaserScan"
                label="APM计算">
           <button id="Button7"
-                  label="步骤1"
+                  label="APM计算"
                   size="normal"
                   imageMso="Calculator"
-                  onAction="onCalAPM1"/>
-          <button id="Button8"
-                  label="步骤2"
-                  size="normal"
-                  imageMso="Calculator"
-                  onAction="onCalAPM2"/>
+                  onAction="onCalAPM"/>
         </group>
         <group id="About"
                label="关于">
