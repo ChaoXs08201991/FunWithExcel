@@ -37,12 +37,17 @@
                   onAction="onGenerate"/>
         </group>
         <group id ="ThreeDLaserScan"
-               label="APM计算">
+               label="===APM计算===">
           <button id="Button7"
+                  label="获取SCENE文件序号"
+                  size="normal"
+                  imageMso="WordOpenParaAbove"
+                  onAction="onCalAPM1"/>
+          <button id="Button8"
                   label="APM计算"
                   size="normal"
                   imageMso="Calculator"
-                  onAction="onCalAPM"/>
+                  onAction="onCalAPM2"/>
         </group>
         <group id="About"
                label="关于">

@@ -330,8 +330,7 @@ Public Class Ribbon1
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
 
-    Public Sub onCalAPM(ByVal control As Office.IRibbonControl)
-        'MsgBox("Excel插件 by VSTO VB.NET", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
+    Public Sub onCalAPM1(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets(1), Excel.Worksheet)
         If LTrim(RTrim(ash.Range("A1").Text)) <> "全站仪点号" And LTrim(RTrim(ash.Range("B1").Text)) <> "y" And
                 LTrim(RTrim(ash.Range("C1").Text)) <> "x" And LTrim(RTrim(ash.Range("D1").Text)) <> "z" Then
@@ -348,14 +347,6 @@ Public Class Ribbon1
             Exit Sub
         End If
         ash.Range("E1").Value = "Scene文件号"
-        Dim i As Integer
-        For i = 2 To nRows Step 3
-            With ash.Range("E" & i & ":E" & i + 2)
-                .HorizontalAlignment = Excel.Constants.xlCenter
-                .VerticalAlignment = -4108
-                .MergeCells = True
-            End With
-        Next
         With ash.Range("F1:H1")
             .HorizontalAlignment = Excel.Constants.xlCenter
             .VerticalAlignment = -4108
@@ -366,6 +357,61 @@ Public Class Ribbon1
         ash.Range("J1").Value = "y"
         ash.Range("K1").Value = "z"
         ash.Range("L1").Value = "z旋转"
+        Dim i As Integer
+        For i = 2 To nRows Step 3
+            With ash.Range("E" & i & ":E" & i + 2)
+                .HorizontalAlignment = Excel.Constants.xlCenter
+                .VerticalAlignment = -4108
+                .MergeCells = True
+            End With
+            With ash.Range("F" & i & ":H" & i + 2)
+                .HorizontalAlignment = Excel.Constants.xlCenter
+                .VerticalAlignment = -4108
+                .MergeCells = True
+            End With
+        Next
+        Dim fileStr As String = ""
+        Using nOpen As New System.Windows.Forms.FolderBrowserDialog
+            nOpen.Description = "选取文件夹"
+            'nOpen.ShowNewFolderButton
+            nOpen.ShowDialog()
+            fileStr = nOpen.SelectedPath
+        End Using
+        If fileStr = "" Then
+            MsgBox("未选择文件夹", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            Exit Sub
+        End If
+        Dim dir As New System.IO.DirectoryInfo(fileStr)
+        i = 0
+        For Each filename As System.IO.DirectoryInfo In dir.GetDirectories
+            Dim tmpfile As String
+            tmpfile = filename.Name
+            Dim countnum As Integer
+            countnum = Left(Right(tmpfile, 7), 3)
+            ash.Range("E" & 3 * i + 2).Value = countnum
+            i = i + 1
+        Next
+    End Sub
+
+    Public Sub onCalAPM2(ByVal control As Office.IRibbonControl)
+        'MsgBox("Excel插件 by VSTO VB.NET", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
+        Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets(1), Excel.Worksheet)
+        If LTrim(RTrim(ash.Range("A1").Text)) <> "全站仪点号" And LTrim(RTrim(ash.Range("B1").Text)) <> "y" And
+                LTrim(RTrim(ash.Range("C1").Text)) <> "x" And LTrim(RTrim(ash.Range("D1").Text)) <> "z" Then
+            MsgBox("不适用于该Sheet工作表!", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
+            Exit Sub
+        End If
+        Dim nRows As Integer = 0
+        Do Until ash.Range("A" & nRows + 1).Text = ""
+            nRows = nRows + 1
+        Loop
+        'nRows = ash.UsedRange.Rows.Count
+        If nRows < 4 Or ((nRows - 1) Mod 3 <> 0) Then
+            MsgBox("检查控制点坐标行数", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
+            Exit Sub
+        End If
+
+
         Dim calAPMNum As Integer
         calAPMNum = (nRows - 1) / 3
         Dim tmpAsh(calAPMNum - 1) As Excel.Worksheet
@@ -379,9 +425,11 @@ Public Class Ribbon1
 
         '///////////////////
         '根据Sheet1中E列的编号更新后续Sheet工作表
-        'For i = 0 To calAPMNum - 1
-        '    tmpAsh(i).Name = ash.Range("E" & 3 * i + 2).Text
-        'Next
+        For i = 0 To calAPMNum - 1
+            If ash.Range("E" & 3 * i + 2).Text <> "" Then
+                tmpAsh(i).Name = ash.Range("E" & 3 * i + 2).Text
+            End If
+        Next
         '//////////////////
 
         For i = 0 To calAPMNum - 1
@@ -399,7 +447,6 @@ Public Class Ribbon1
             tmpAsh(i).Range("V15").Copy()
             ash.Range("L" & 3 * i + 2).PasteSpecial(Excel.XlPasteType.xlPasteValues)
         Next
-        'ash.Range("A1").Select()
         ash.Activate()
         MsgBox("APM批量计算完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示")
     End Sub
