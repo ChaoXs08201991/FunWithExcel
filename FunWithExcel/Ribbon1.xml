@@ -2,9 +2,9 @@
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
   <ribbon>
     <tabs>
-      <tab id="chaoxs" label="FunWithExcel">
+      <tab id="chaoxs" label="QuickTools">
         <group id="AutoGenerate"
-               label="===自动生成===">
+               label="自动生成">
           <button id="Button1"
                   label="立柱轴线偏差生成"
                   size="normal"
@@ -14,7 +14,7 @@
                   onAction="onAutoGen"/>
         </group >
         <group id="AutoMonitor"
-               label="===自动化监测报表===">
+               label="自动化监测报表">
           <button id="Button3"
                   label="添加棱镜常数"
                   size="normal"
@@ -37,13 +37,18 @@
                   onAction="onGenerate"/>
         </group>
         <group id ="ThreeDLaserScan"
-               label="===APM计算===">
+               label="APM计算">
           <button id="Button7"
+                  label="生成APM计算表"
+                  size="normal"
+                  imageMso="MoviePlayAutomatically"
+                  onAction="onCalAPM"/>
+          <button id="Button8"
                   label="获取SCENE文件序号"
                   size="normal"
                   imageMso="WordOpenParaAbove"
                   onAction="onCalAPM1"/>
-          <button id="Button8"
+          <button id="Button9"
                   label="APM计算"
                   size="normal"
                   imageMso="Calculator"

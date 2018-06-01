@@ -330,6 +330,14 @@ Public Class Ribbon1
         MsgBox("完成", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示")
     End Sub
 
+    Public Sub onCalAPM(ByVal control As Office.IRibbonControl)
+        Globals.ThisAddIn.Application.Worksheets.Add()
+        CType(Globals.ThisAddIn.Application.ActiveSheet, Excel.Worksheet).Move(After:=Globals.ThisAddIn.Application.Worksheets(Globals.ThisAddIn.Application.ActiveWorkbook.Sheets.Count))
+        Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets(2), Excel.Worksheet)
+        ash.Range("A1").Value = 21
+        ash.Name = "0"
+
+    End Sub
     Public Sub onCalAPM1(ByVal control As Office.IRibbonControl)
         Dim ash As Excel.Worksheet = CType(Globals.ThisAddIn.Application.Worksheets(1), Excel.Worksheet)
         If LTrim(RTrim(ash.Range("A1").Text)) <> "全站仪点号" And LTrim(RTrim(ash.Range("B1").Text)) <> "y" And
@@ -381,9 +389,9 @@ Public Class Ribbon1
             MsgBox("未选择文件夹", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "错误")
             Exit Sub
         End If
-        Dim dir As New System.IO.DirectoryInfo(fileStr)
+        Dim dir As New IO.DirectoryInfo(fileStr)
         i = 0
-        For Each filename As System.IO.DirectoryInfo In dir.GetDirectories
+        For Each filename As IO.DirectoryInfo In dir.GetDirectories
             Dim tmpfile As String
             tmpfile = filename.Name
             Dim countnum As Integer
